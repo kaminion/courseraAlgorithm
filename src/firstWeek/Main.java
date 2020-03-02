@@ -7,23 +7,24 @@ public class Main {
 
         BufferedReader StdIn = new BufferedReader(new InputStreamReader(System.in));
 
-        int N = Integer.valueOf(StdIn.readLine()); // 객체 수 받음
+        int N = Integer.parseInt(StdIn.readLine()); // 객체 수 받음
         System.out.println(N);
 
         UF uf = new UF(N);
 
         while(!StdIn.readLine().equals("end"))
         {
-            int p = Integer.valueOf(StdIn.readLine());
+            int p = Integer.parseInt(StdIn.readLine());
             System.out.println("p: " + p);
-            int q = Integer.valueOf(StdIn.readLine());
+            int q = Integer.parseInt(StdIn.readLine());
             System.out.println("q: " + q );
             if(!uf.connected(p, q))
             {
                 uf.union(p, q);
-                System.out.println(p + "" + q);
+                System.out.println(p + " " + q);
             }
         }
+        uf.show();
 
 
     }

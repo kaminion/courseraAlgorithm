@@ -1,48 +1,58 @@
 package firstWeek;
 
 import java.util.ArrayList;
+import java.util.Arrays;
 
 public class UF {
 
-    int[] unionArray;
+    // 집합에 엮어서 생각
+    // 동치, 서로 연결되어있다.
+    private int[] unionArray;
 
     public UF(int n)
     {
         unionArray = new int[n];
-        System.out.println(unionArray.length);
+
+        // 자기 인덱스로 초기화
+        for(int i=0;i<unionArray.length;i++) {
+            unionArray[i] = i;
+        }
+
     }
 
     public void union(int p, int q)
     {
-        unionArray[p] = q;
+        // 근데 누구의 값을 덮어씔 건지 결정, 첫번째 인자에 두번째 인자껄 덮어씌움
+        // 문제점 1. 첫번째 인자에 들어있는 값에 두번째 인자에 넣는 과정 필요
+        int pid = unionArray[p];
+        int qid = unionArray[q];
+
+        // 연결되어있는 모든것에 두번째 인자 삽입
+        for(int i = 0; i < unionArray.length; i++)
+        {
+            if(unionArray[i] == pid) unionArray[i] = qid;
+        }
+
     }
 
     public boolean connected(int p, int q)
     {
-        boolean flag = false;
-        // 연결확인
-        //8-3-4-9
-        //8 부터 생각
-        while(p != 0)
-        {
-            int nextNode = unionArray[p];
-            if (nextNode == q) {
-                flag = true;
-                break;
-            }
-            p = nextNode;
-        }
-
-        return flag;
+        // 같으면 true 대신 초기화가 됐다는 가정하에
+        return unionArray[p] == unionArray[q];
     }
 
     public int find(int p)
     {
-        return 0;
+        return unionArray[p];
     }
 
     public int count()
     {
-        return 0;
+        return unionArray.length;
+    }
+
+    public void show()
+    {
+        System.out.println(Arrays.toString(unionArray));
     }
 }
