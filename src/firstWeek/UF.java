@@ -8,6 +8,7 @@ public class UF {
     // 집합에 엮어서 생각
     // 동치, 서로 연결되어있다.
     private int[] unionArray;
+    private int[] sz; // i를 루트로하여 만든 트리의 요소의 수 
 
     public UF(int n)
     {
